@@ -20,6 +20,13 @@ export default createGlobalStyle`
     body, input, button{
         font-family: "Montserrat", sans-serif;
     }
+
+    *:focus{
+      padding: 10px;
+      display: inline-block;
+      border: 2px solid #000;
+      background-color: aliceblue;
+    }
 `;
 
 export const Container = styled.div`
@@ -29,7 +36,7 @@ export const Container = styled.div`
 `;
 
 export const TopBar = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 62px;
   background-color: ${colors.secondary};
   margin-bottom: 35px;
