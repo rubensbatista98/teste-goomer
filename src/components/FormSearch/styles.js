@@ -28,7 +28,11 @@ export const Input = styled.input`
   font-size: ${font.medium};
   background-color: transparent;
   padding: 0 10px;
-  border: none;
+  border: 1px solid transparent;
+
+  &:focus {
+    border-color: ${colors.fourth};
+  }
 `;
 
 export const Button = styled.button`
@@ -40,6 +44,11 @@ export const Button = styled.button`
 
   display: flex;
   align-items: center;
+
+  &:focus,
+  &:hover {
+    background-color: ${colors.fourth};
+  }
 `;
 
 export const IconSearch = styled(MdSearch)`
