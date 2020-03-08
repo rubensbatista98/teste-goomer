@@ -1,12 +1,17 @@
 import React from "react";
 
 import Routes from "./Routes";
-import GlobalStyle from "./styles/global";
+import GlobalStyle, { Container, TopBar } from "./styles/global";
 
 function App() {
   return (
     <>
-      <Routes />
+      <TopBar />
+
+      <Container>
+        <Routes />
+      </Container>
+
       <GlobalStyle />
     </>
   );
