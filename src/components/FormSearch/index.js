@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, Label, Input, Button } from "./styles";
+import { Form, Label, Input, Button, IconSearch } from "./styles";
 
 const FormSearch = ({ bgColor }) => {
   return (
@@ -9,7 +9,9 @@ const FormSearch = ({ bgColor }) => {
 
       <Input type="text" id="search" />
 
-      <Button type="submit">Buscar</Button>
+      <Button type="submit" aria-label="Buscar">
+        <IconSearch />
+      </Button>
     </Form>
   );
 };

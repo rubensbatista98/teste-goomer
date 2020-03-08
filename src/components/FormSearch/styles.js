@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { MdSearch } from "react-icons/md";
 
 import { colors, font } from "../../styles/settings";
 
 export const Form = styled.form`
   width: 100%;
   max-width: 840px;
+  height: 40px;
   background-color: ${props => (props.bgColor ? props.bgColor : "#FBFBFB")};
   margin: 35px auto 0;
   box-shadow: 0 2px 4px ${colors.shadow};
@@ -35,4 +37,13 @@ export const Button = styled.button`
   padding: 0 20px;
   border: none;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+`;
+
+export const IconSearch = styled(MdSearch)`
+  width: 24px;
+  height: 24px;
+  color: ${colors.primary};
 `;
