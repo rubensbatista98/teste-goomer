@@ -1,16 +1,16 @@
 import React from "react";
 
+import FormSearch from "../../components/FormSearch";
+
+import { Title } from "./styles";
+
 const Home = () => {
   return (
     <>
       <header>
-        <h1>Bem-vindo ao Lista Rango</h1>
+        <Title>Bem-vindo ao Lista Rango</Title>
 
-        <form>
-          <label htmlFor="search">Buscar estabelecimento</label>
-          <input type="text" id="search" />
-          <button type="submit">Buscar</button>
-        </form>
+        <FormSearch />
       </header>
 
       <section>

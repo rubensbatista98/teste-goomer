@@ -20,13 +20,6 @@ export default createGlobalStyle`
     body, input, button{
         font-family: "Montserrat", sans-serif;
     }
-
-    *:focus{
-      padding: 10px;
-      display: inline-block;
-      border: 2px solid #000;
-      background-color: aliceblue;
-    }
 `;
 
 export const Container = styled.div`
