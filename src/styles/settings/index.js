@@ -9,7 +9,7 @@ export const colors = {
 
 export const font = {
   verySmall: ".5rem",
-  small: "1.3rem",
+  small: ".75rem",
   medium: "1rem",
   big: "1.5rem"
 };
