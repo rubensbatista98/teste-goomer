@@ -16,4 +16,4 @@ const FormSearch = ({ bgColor }) => {
   );
 };
 
-export default FormSearch;
+export default React.memo(FormSearch);

@@ -25,7 +25,7 @@ export default createGlobalStyle`
 
 export const Container = styled.div`
   width: calc(100% - 20px);
-  max-width: 1215px;
+  max-width: 1225px;
   margin: 0 auto;
 `;
 
