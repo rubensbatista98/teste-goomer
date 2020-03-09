@@ -14,12 +14,29 @@ export const Form = styled.form`
   overflow: hidden;
 
   display: flex;
+
+  @media (max-width: 900px) {
+    max-width: 500px;
+  }
+
+  @media (max-width: 550px) {
+    height: auto;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Label = styled.label`
   font-size: ${font.medium};
   background-color: #ffffff;
   padding: 10px 20px 10px 40px;
+
+  @media (max-width: 900px) {
+    padding-left: 20px;
+  }
+
+  @media (max-width: 500px) {
+    flex-basis: 100%;
+  }
 `;
 
 export const Input = styled.input`
@@ -31,7 +48,11 @@ export const Input = styled.input`
   border: 1px solid transparent;
 
   &:focus {
-    border-color: ${colors.fourth};
+    outline: none;
+  }
+
+  @media (max-width: 500px) {
+    padding: 10px 5px 10px 20px;
   }
 `;
 
