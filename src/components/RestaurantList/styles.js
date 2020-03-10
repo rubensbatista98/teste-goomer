@@ -16,3 +16,11 @@ export const List = styled.ul`
 export const Item = styled.li`
   padding: 20px 20px 5px 5px;
 `;
+
+export const Error = styled.p`
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 40px 10px;
+`;

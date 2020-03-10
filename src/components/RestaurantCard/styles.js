@@ -1,8 +1,15 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { colors, font } from "../../styles/settings";
 
+export const LinkGoomer = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 export const Card = styled.div`
+  height: 100%;
   border-radius: 4px;
   box-shadow: 0 2px 4px ${colors.shadow};
   position: relative;
@@ -19,6 +26,7 @@ export const Card = styled.div`
 
 export const Thumb = styled.div`
   width: 100px;
+  height: 100px;
   margin-right: 25px;
 
   img {
@@ -28,6 +36,7 @@ export const Thumb = styled.div`
 
   @media (max-width: 800px) {
     width: 100%;
+    height: auto;
     max-height: 300px;
     margin: 0 0 25px;
   }

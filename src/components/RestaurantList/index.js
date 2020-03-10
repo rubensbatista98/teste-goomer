@@ -1,27 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import RestaurantCard from "../RestaurantCard";
+import api from "../../services/api";
 
-import { List, Item } from "./styles";
+import { List, Item, Error } from "./styles";
 
 const RestaurantList = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    async function loadRestaurants() {
+      try {
+        setError(false);
+
+        const data = await api("restaurants");
+
+        setRestaurants(() => [...data]);
+      } catch (error) {
+        setError(true);
+      }
+    }
+
+    loadRestaurants();
+  }, []);
+
+  if (error) return <Error>Desculpe, mas ocorreu um erro inesperado.</Error>;
+
   return (
     <List>
-      <Item>
-        <RestaurantCard isOpen={true} />
-      </Item>
-
-      <Item>
-        <RestaurantCard isOpen={false} />
-      </Item>
-
-      <Item>
-        <RestaurantCard isOpen={true} />
-      </Item>
-
-      <Item>
-        <RestaurantCard isOpen={true} />
-      </Item>
+      {restaurants.map(restaurant => (
+        <Item key={restaurant?.id}>
+          <RestaurantCard isOpen={true} restaurant={restaurant} />
+        </Item>
+      ))}
     </List>
   );
 };
