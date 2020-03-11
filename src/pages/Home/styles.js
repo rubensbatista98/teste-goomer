@@ -16,3 +16,7 @@ export const Error = styled.p`
   text-align: center;
   margin: 40px 10px;
 `;
+
+export const NotFound = styled(Error)`
+  margin: 50px 20px;
+`;

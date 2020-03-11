@@ -1,14 +1,31 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 
 import FormSearch from "../../components/FormSearch";
 import RestaurantList from "../../components/RestaurantsList";
 import { RestaurantsContext } from "../../contexts/RestaurantsContext";
 
-import { Title, Error } from "./styles";
+import { Title, Error, NotFound } from "./styles";
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const [notFound, setNotFound] = useState(false);
   const [restaurantsFromContext, , error] = useContext(RestaurantsContext);
+
+  const filterRestaurantsByName = useCallback(
+    name => {
+      const filtered = restaurantsFromContext.filter(restaurant =>
+        restaurant.name.toLowerCase().includes(name.toLowerCase().trim())
+      );
+
+      if (filtered?.length === 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
+        setRestaurants(filtered);
+      }
+    },
+    [restaurantsFromContext]
+  );
 
   useEffect(() => {
     setRestaurants(restaurantsFromContext);
@@ -21,11 +38,15 @@ const Home = () => {
       <header>
         <Title>Bem-vindo ao Lista Rango</Title>
 
-        <FormSearch />
+        <FormSearch filterByValue={filterRestaurantsByName} />
       </header>
 
       <section>
-        <RestaurantList restaurants={restaurants} />
+        {notFound ? (
+          <NotFound>Estabelecimento não encontrado.</NotFound>
+        ) : (
+          <RestaurantList restaurants={restaurants} />
+        )}
       </section>
     </>
   );
