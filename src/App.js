@@ -1,6 +1,7 @@
 import React from "react";
 
 import Routes from "./Routes";
+import { RestaurantsProvider } from "./contexts/RestaurantsContext";
 import GlobalStyle, { Container, TopBar } from "./styles/global";
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
       <TopBar />
 
       <Container>
-        <Routes />
+        <RestaurantsProvider>
+          <Routes />
+        </RestaurantsProvider>
       </Container>
 
       <GlobalStyle />

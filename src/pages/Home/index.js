@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import FormSearch from "../../components/FormSearch";
-import RestaurantList from "../../components/RestaurantList";
+import RestaurantList from "../../components/RestaurantsList";
+import { RestaurantsContext } from "../../contexts/RestaurantsContext";
 
-import { Title } from "./styles";
+import { Title, Error } from "./styles";
 
 const Home = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [restaurantsFromContext, , error] = useContext(RestaurantsContext);
+
+  useEffect(() => {
+    setRestaurants(restaurantsFromContext);
+  }, [restaurantsFromContext]);
+
+  if (error) return <Error>Desculpe, mas ocorreu um erro inesperado.</Error>;
+
   return (
     <>
       <header>
@@ -15,7 +25,7 @@ const Home = () => {
       </header>
 
       <section>
-        <RestaurantList />
+        <RestaurantList restaurants={restaurants} />
       </section>
     </>
   );
