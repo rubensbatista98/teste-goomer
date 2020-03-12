@@ -9,7 +9,7 @@ const RestaurantList = ({ restaurants }) => {
     <List>
       {restaurants.map(restaurant => (
         <Item key={restaurant?.id}>
-          <RestaurantCard isOpen={true} restaurant={restaurant} />
+          <RestaurantCard restaurant={restaurant} />
         </Item>
       ))}
     </List>
