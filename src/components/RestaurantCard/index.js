@@ -21,7 +21,7 @@ const RestaurantCard = ({ restaurant }) => {
       );
 
     return restaurant.hours.some(hour => {
-      const { from, to } = hour;
+      const { from, to, days } = hour;
 
       const openingHour = from.split(":");
       const closingHour = to.split(":");
@@ -42,7 +42,8 @@ const RestaurantCard = ({ restaurant }) => {
 
       const isOpenNow =
         timeNow.getTime() >= openingTime.getTime() &&
-        timeNow.getTime() <= closeTime.getTime();
+        timeNow.getTime() <= closeTime.getTime() &&
+        days.indexOf(openingTime.getDay() + 1) > -1;
 
       return isOpenNow;
     });
