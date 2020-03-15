@@ -6,21 +6,26 @@ const RestaurantCard = ({ restaurant }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const getIfIsOpen = useCallback(() => {
-    if (!restaurant?.hours) return false;
+    if (!restaurant?.hours) return { isOpenNow: false, timeToChange: null };
 
     const timeNow = new Date();
+    const hoursStatus = [];
 
-    const getDate = (date, hour, minute) =>
+    const getDate = (date, hour, minutes) =>
       new Date(
         timeNow.getFullYear(),
         timeNow.getMonth(),
         date,
         hour,
-        minute,
+        minutes,
         0
       );
 
-    return restaurant.hours.some(hour => {
+    const hoursValidToday = restaurant.hours.filter(
+      hour => hour.days.indexOf(timeNow.getDay() + 1) > -1
+    );
+
+    hoursValidToday.forEach(hour => {
       const { from, to, days } = hour;
 
       const openingHour = from.split(":");
@@ -32,7 +37,7 @@ const RestaurantCard = ({ restaurant }) => {
         openingHour[1]
       );
 
-      const closeTime = getDate(
+      const closingTime = getDate(
         openingHour[0] > closingHour[0]
           ? timeNow.getDate() + 1
           : timeNow.getDate(),
@@ -42,17 +47,53 @@ const RestaurantCard = ({ restaurant }) => {
 
       const isOpenNow =
         timeNow.getTime() >= openingTime.getTime() &&
-        timeNow.getTime() <= closeTime.getTime() &&
+        timeNow.getTime() < closingTime.getTime() &&
         days.indexOf(openingTime.getDay() + 1) > -1;
 
-      return isOpenNow;
+      let timeToChange = null;
+
+      if (isOpenNow) timeToChange = closingTime.getTime() - timeNow.getTime();
+
+      if (!isOpenNow) {
+        const MILLISECONDS_IN_A_DAY = 86400000;
+        const nowIsBeforeOpening = timeNow.getTime() < openingTime.getTime();
+        const nowIsAfterClosing = timeNow.getTime() >= closingTime.getTime();
+
+        if (nowIsBeforeOpening) {
+          timeToChange = openingTime.getTime() - timeNow.getTime();
+        }
+
+        if (nowIsAfterClosing) {
+          timeToChange = openingTime.getTime() + MILLISECONDS_IN_A_DAY;
+        }
+      }
+
+      hoursStatus.push({ isOpenNow, timeToChange });
     });
+
+    const openHour = hoursStatus.find(hour => hour.isOpenNow);
+
+    if (openHour) return openHour;
+
+    const orderedHourStatus = [...hoursStatus].sort(
+      (a, b) => a.timeToChange - b.timeToChange
+    );
+
+    return orderedHourStatus[0];
   }, [restaurant]);
 
   useEffect(() => {
-    const isOpened = getIfIsOpen();
+    function changeState() {
+      const { isOpenNow, timeToChange } = getIfIsOpen();
 
-    setIsOpen(isOpened);
+      if (timeToChange != null) {
+        setTimeout(changeState, timeToChange);
+      }
+
+      setIsOpen(isOpenNow);
+    }
+
+    changeState();
   }, [getIfIsOpen]);
 
   return (
