@@ -8,7 +8,7 @@ export const Form = styled.form`
   max-width: 840px;
   height: 40px;
   background-color: ${props => (props.bgColor ? props.bgColor : "#FBFBFB")};
-  margin: 35px auto 0;
+  margin: 0 auto;
   box-shadow: 0 2px 4px ${colors.shadow};
   border-radius: 20px;
   overflow: hidden;

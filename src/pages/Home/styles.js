@@ -7,6 +7,7 @@ export const Title = styled.h1`
   text-align: center;
   font-weight: 500;
   color: ${colors.primary};
+  margin-bottom: 35px;
 `;
 
 export const Error = styled.p`

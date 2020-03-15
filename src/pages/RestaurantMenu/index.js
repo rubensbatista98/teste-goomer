@@ -1,5 +1,6 @@
 import React from "react";
 
+import FormSearch from "../../components/FormSearch";
 import { Wrapper, Header, Section, Aside, Image, Title, Hour } from "./styles";
 
 const RestaurantMenu = () => {
@@ -29,7 +30,7 @@ const RestaurantMenu = () => {
       </Header>
 
       <Section>
-        <div>Formulario</div>
+        <FormSearch bgColor="#E6E6E6" />
 
         <ul className="accordion">
           <li className="item">
