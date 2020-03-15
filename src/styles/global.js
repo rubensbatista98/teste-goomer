@@ -16,6 +16,7 @@ export default createGlobalStyle`
     body{
         min-height: 100vh;
         font-size: 1rem;
+        color: ${colors.primary}
     }
 
     body, input, button{
