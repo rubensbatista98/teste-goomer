@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import DishCard from "../DishCard";
 
-import { Accordion, Item, Collapse } from "./styles";
+import { Accordion, Item, Collapse, Button } from "./styles";
 
 const AccordionMenu = () => {
+  const handleBtnClick = useCallback(event => {
+    event.preventDefault();
+
+    const collapseId = event.currentTarget.getAttribute("href");
+
+    if (collapseId) {
+      event.currentTarget.classList.toggle("-open");
+      document.querySelector(`${collapseId}`).classList.toggle("-open");
+    }
+  }, []);
+
   return (
     <Accordion>
       <Item>
-        <a href="#collapse-1">Almoços</a>
+        <Button href="#collapse-1" onClick={handleBtnClick}>
+          Almoços
+        </Button>
 
         <Collapse id="collapse-1">
           <DishCard />
@@ -18,7 +31,9 @@ const AccordionMenu = () => {
       </Item>
 
       <Item>
-        <a href="#collapse-2">Bebidas</a>
+        <Button href="#collapse-2" onClick={handleBtnClick}>
+          Bebidas
+        </Button>
 
         <Collapse id="collapse-2">
           <DishCard />
