@@ -4,7 +4,7 @@ import { font } from "../../styles/settings";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 800px 280px;
+  grid-template-columns: minmax(600px, 800px) minmax(200px, 280px);
   grid-template-areas:
     "header  ."
     "section aside";

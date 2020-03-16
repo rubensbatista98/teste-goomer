@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card, Thumb, CardBody, Price, PromoPrice } from "./styles";
+import { Card, Thumb, CardBody, Title, Description, Price } from "./styles";
 
 const DishCard = () => {
   return (
@@ -13,13 +13,15 @@ const DishCard = () => {
       </Thumb>
 
       <CardBody>
-        <h3>Nome do Prato</h3>
+        <Title>Nome do Prato</Title>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+        <Description>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        </Description>
 
         <div>
-          {true ? <PromoPrice>R$19,00</PromoPrice> : null}
-          <Price onPromo={true}>R$29,00</Price>
+          {true ? <Price>R$19,00</Price> : null}
+          <Price isPromoActive={true}>R$29,00</Price>
         </div>
       </CardBody>
     </Card>

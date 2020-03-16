@@ -7,8 +7,7 @@ export const Card = styled.div`
   height: 100%;
 
   border-radius: 4px;
-  box-shadow: 0 2px 4px ${colors.shadow};
-  position: relative;
+  box-shadow: 0 4px 8px ${colors.shadow};
 
   display: flex;
 `;
@@ -30,27 +29,35 @@ export const CardBody = styled.div`
   justify-content: center;
 
   padding: 15px 10px 15px 0;
+`;
 
-  h3 {
-    font-size: ${font.medium};
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
+export const Title = styled.h3`
+  font-size: ${font.medium};
+  font-weight: 500;
+  margin-bottom: 10px;
+`;
 
-  p {
-    font-size: ${font.small};
-    margin-bottom: 10px;
-  }
+export const Description = styled.p`
+  font-size: ${font.small};
+  margin-bottom: 10px;
 `;
 
 export const Price = styled.span`
-  color: ${({ onPromo }) => (onPromo ? "#989898" : colors.secondary)};
-  font-size: ${({ onPromo }) => (onPromo ? "12px" : font.medium)};
-  text-decoration: ${({ onPromo }) => (onPromo ? "line-through" : null)};
+  font-weight: 500;
+  ${({ isPromoActive }) => handlePrice(isPromoActive)}
 `;
 
-export const PromoPrice = styled.span`
-  font-weight: 500;
-  color: ${colors.secondary};
-  margin-right: 10px;
-`;
+function handlePrice(promoStatus) {
+  if (promoStatus) {
+    return {
+      "font-size": "12px",
+      color: "#989898",
+      "text-decoration": "line-through"
+    };
+  }
+
+  return {
+    color: colors.secondary,
+    "margin-right": "10px"
+  };
+}
