@@ -55,7 +55,7 @@ export const Title = styled.h1`
   margin-bottom: 10px;
 `;
 
-export const Hour = styled.p`
+export const Schedule = styled.p`
   font-size: ${font.small};
   margin-bottom: 5px;
 `;

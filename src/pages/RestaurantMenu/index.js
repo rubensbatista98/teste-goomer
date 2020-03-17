@@ -3,7 +3,15 @@ import { useParams } from "react-router-dom";
 
 import FormSearch from "../../components/FormSearch";
 import AccordionMenu from "../../components/AccordionMenu";
-import { Wrapper, Header, Section, Aside, Image, Title, Hour } from "./styles";
+import {
+  Wrapper,
+  Header,
+  Section,
+  Aside,
+  Image,
+  Title,
+  Schedule
+} from "./styles";
 
 import api from "../../services/api";
 
@@ -34,15 +42,15 @@ const RestaurantMenu = () => {
         <div>
           <Title>Nome do Restaurante</Title>
 
-          <Hour>
+          <Schedule>
             Segunda à Sexta: <strong>11:30 às 15:00</strong>
-          </Hour>
-          <Hour>
+          </Schedule>
+          <Schedule>
             Sábados: <strong>11:30 às 22:00</strong>
-          </Hour>
-          <Hour>
+          </Schedule>
+          <Schedule>
             Domingos e Feriados: <strong>11:30 às 15:00</strong>
-          </Hour>
+          </Schedule>
         </div>
       </Header>
 

@@ -1,44 +1,59 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import DishCard from "../DishCard";
 
 import { Accordion, Item, Collapse, Button } from "./styles";
 
-const AccordionMenu = () => {
+const AccordionMenu = ({ menu }) => {
+  const menuGroups = useMemo(() => {
+    if (menu.length === 0) return null;
+
+    const groups = menu.reduce((groupsAccumulator, dish) => {
+      const dishGroup = dish.group.toUpperCase().replace(/\s/g, "_");
+
+      if (groupsAccumulator[dishGroup]) {
+        groupsAccumulator[dishGroup].push({ ...dish });
+        return groupsAccumulator;
+      }
+
+      groupsAccumulator[dishGroup] = [{ ...dish }];
+      return groupsAccumulator;
+    }, {});
+
+    console.log(groups);
+    return groups;
+  }, [menu]);
+
   const handleBtnClick = useCallback(event => {
     event.preventDefault();
 
-    const collapseId = event.currentTarget.getAttribute("href");
+    const buttonElement = event.currentTarget;
+    const collapseId = buttonElement.getAttribute("href");
+    const collapseElement = document.querySelector(`${collapseId}`);
 
-    if (collapseId) {
-      event.currentTarget.classList.toggle("-open");
-      document.querySelector(`${collapseId}`).classList.toggle("-open");
+    if (collapseElement) {
+      buttonElement.classList.toggle("-open");
+      collapseElement.classList.toggle("-open");
     }
   }, []);
 
+  if (!menuGroups) return null;
+
   return (
     <Accordion>
-      <Item>
-        <Button href="#collapse-1" onClick={handleBtnClick}>
-          Almoços
-        </Button>
+      {Object.keys(menuGroups).map(group => (
+        <Item key={group}>
+          <Button href={`#${group}`} onClick={handleBtnClick}>
+            {group.replace(/_/g, " ")}
+          </Button>
 
-        <Collapse id="collapse-1">
-          <DishCard />
-          <DishCard />
-          <DishCard />
-        </Collapse>
-      </Item>
-
-      <Item>
-        <Button href="#collapse-2" onClick={handleBtnClick}>
-          Bebidas
-        </Button>
-
-        <Collapse id="collapse-2">
-          <DishCard />
-        </Collapse>
-      </Item>
+          <Collapse id={group}>
+            {menuGroups[group].map(dish => (
+              <DishCard key={dish.name} dish={dish} />
+            ))}
+          </Collapse>
+        </Item>
+      ))}
     </Accordion>
   );
 };
