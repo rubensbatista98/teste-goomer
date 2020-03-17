@@ -34,7 +34,7 @@ export const Label = styled.label`
     padding-left: 20px;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 550px) {
     flex-basis: 100%;
   }
 `;
@@ -51,7 +51,7 @@ export const Input = styled.input`
     outline: none;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 550px) {
     padding: 10px 5px 10px 20px;
   }
 `;

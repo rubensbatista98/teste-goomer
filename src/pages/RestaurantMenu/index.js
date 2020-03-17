@@ -36,7 +36,7 @@ const RestaurantMenu = () => {
         <AccordionMenu />
       </Section>
 
-      <Aside></Aside>
+      <Aside />
     </Wrapper>
   );
 };

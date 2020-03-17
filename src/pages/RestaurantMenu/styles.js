@@ -4,7 +4,7 @@ import { font } from "../../styles/settings";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: minmax(600px, 800px) minmax(200px, 280px);
+  grid-template-columns: minmax(400px, 800px) minmax(200px, 280px);
   grid-template-areas:
     "header  ."
     "section aside";
@@ -12,6 +12,23 @@ export const Wrapper = styled.div`
   grid-gap: 15px 135px;
 
   margin-bottom: 50px;
+
+  @media (max-width: 950px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "section"
+      "aside";
+    grid-row-gap: 30px;
+
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  @media (max-width: 550px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 `;
 
 export const Header = styled.header`
@@ -52,4 +69,8 @@ export const Aside = styled.aside`
 
   height: 760px;
   background-color: #e6e6e6;
+
+  @media (max-width: 950px) {
+    max-height: 200px;
+  }
 `;

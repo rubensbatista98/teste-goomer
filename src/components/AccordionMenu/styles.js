@@ -13,7 +13,7 @@ export const Item = styled.li`
 
 export const Collapse = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(385px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   grid-template-rows: 115px;
   grid-gap: 25px 30px;
 
