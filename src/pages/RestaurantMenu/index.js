@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import FormSearch from "../../components/FormSearch";
 import AccordionMenu from "../../components/AccordionMenu";
 import { Wrapper, Header, Section, Aside, Image, Title, Hour } from "./styles";
 
+import api from "../../services/api";
+
 const RestaurantMenu = () => {
+  const [menu, setMenu] = useState([]);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function loadMenu() {
+      const response = await api(`restaurants/${id}/menu`);
+
+      setMenu(response);
+    }
+
+    loadMenu();
+  }, [id]);
   return (
     <Wrapper>
       <Header>
@@ -33,7 +49,7 @@ const RestaurantMenu = () => {
       <Section>
         <FormSearch bgColor="#E6E6E6" />
 
-        <AccordionMenu />
+        <AccordionMenu menu={menu} />
       </Section>
 
       <Aside />
