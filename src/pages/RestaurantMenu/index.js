@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import FormSearch from "../../components/FormSearch";
 import AccordionMenu from "../../components/AccordionMenu";
+import { RestaurantsContext } from "../../contexts/RestaurantsContext";
 import {
   Wrapper,
   Header,
@@ -16,9 +17,19 @@ import {
 import api from "../../services/api";
 
 const RestaurantMenu = () => {
+  const [restaurant, setRestaurant] = useState({});
   const [menu, setMenu] = useState([]);
+  const [restaurants] = useContext(RestaurantsContext);
 
   const { id } = useParams();
+
+  useEffect(() => {
+    const restaurant = restaurants.find(
+      restaurant => restaurant.id === Number(id)
+    );
+
+    setRestaurant(restaurant);
+  }, [restaurants, id]);
 
   useEffect(() => {
     async function loadMenu() {
@@ -33,14 +44,11 @@ const RestaurantMenu = () => {
     <Wrapper>
       <Header>
         <Image>
-          <img
-            src="https://images.unsplash.com/photo-1525640788966-69bdb028aa73?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d53c30ba55d9ca863d57fabfffdb416b&auto=format&fit=crop&w=1047&q=80"
-            alt="Imagem do Restaurante"
-          />
+          <img src={restaurant?.image} alt="Imagem do Restaurante" />
         </Image>
 
         <div>
-          <Title>Nome do Restaurante</Title>
+          <Title>{restaurant?.name?.toUpperCase()}</Title>
 
           <Schedule>
             Segunda à Sexta: <strong>11:30 às 15:00</strong>

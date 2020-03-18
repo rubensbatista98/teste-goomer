@@ -35,9 +35,11 @@ const DishCard = ({ dish }) => {
             <Price>{convertToCurrency(dish.sales[0].price)}</Price>
           )}
 
-          <Price isPromoActive={!!dish?.sales}>
-            {convertToCurrency(dish.price)}
-          </Price>
+          {!!dish.price && (
+            <Price isPromoActive={!!dish?.sales}>
+              {convertToCurrency(dish.price)}
+            </Price>
+          )}
         </div>
       </CardBody>
     </Card>
