@@ -20,7 +20,6 @@ const AccordionMenu = ({ menu }) => {
       return groupsAccumulator;
     }, {});
 
-    console.log(groups);
     return groups;
   }, [menu]);
 

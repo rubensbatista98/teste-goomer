@@ -1,27 +1,43 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import { Card, Thumb, CardBody, Title, Description, Price } from "./styles";
 
-const DishCard = () => {
+const DishCard = ({ dish }) => {
+  const convertToCurrency = useCallback(price => {
+    return price.toLocaleString("PT-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+  }, []);
+
   return (
     <Card>
       <Thumb>
         <img
-          src="https://images.unsplash.com/photo-1525640788966-69bdb028aa73?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d53c30ba55d9ca863d57fabfffdb416b&auto=format&fit=crop&w=1047&q=80"
-          alt=""
+          src={
+            !dish.image
+              ? "https://source.unsplash.com/1600x900/?doughnut"
+              : dish.image
+          }
+          alt={dish.name}
         />
       </Thumb>
 
       <CardBody>
-        <Title>Nome do Prato</Title>
+        <Title>{dish.name}</Title>
 
         <Description>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         </Description>
 
         <div>
-          {true ? <Price>R$19,00</Price> : null}
-          <Price isPromoActive={true}>R$29,00</Price>
+          {!!dish?.sales && (
+            <Price>{convertToCurrency(dish.sales[0].price)}</Price>
+          )}
+
+          <Price isPromoActive={!!dish?.sales}>
+            {convertToCurrency(dish.price)}
+          </Price>
         </div>
       </CardBody>
     </Card>

@@ -13,6 +13,7 @@ export const Card = styled.div`
 
 export const Thumb = styled.div`
   max-width: 115px;
+  min-width: 115px;
   height: 115px;
   margin-right: 15px;
 
