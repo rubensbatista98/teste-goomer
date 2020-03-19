@@ -4,6 +4,7 @@ import { colors, font } from "../../styles/settings";
 
 export const Card = styled.div`
   height: 100%;
+  position: relative;
 
   border-radius: 4px;
   box-shadow: 0 4px 8px ${colors.shadow};
@@ -61,3 +62,27 @@ function handlePrice(promoStatus) {
     "margin-right": "10px"
   };
 }
+
+export const Promo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  transform: translateY(-30%);
+
+  width: 100px;
+  height: 20px;
+  color: #fff;
+  background-color: ${colors.third};
+  border-radius: 10px;
+
+  p {
+    font-size: ${font.verySmall};
+    font-weight: bold;
+    margin-left: 3px;
+  }
+`;

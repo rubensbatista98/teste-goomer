@@ -1,6 +1,15 @@
 import React, { useCallback } from "react";
+import { MdPersonOutline } from "react-icons/md";
 
-import { Card, Thumb, CardBody, Title, Description, Price } from "./styles";
+import {
+  Card,
+  Thumb,
+  CardBody,
+  Title,
+  Description,
+  Price,
+  Promo
+} from "./styles";
 
 const DishCard = ({ dish }) => {
   const convertToCurrency = useCallback(price => {
@@ -41,6 +50,13 @@ const DishCard = ({ dish }) => {
             </Price>
           )}
         </div>
+
+        {!!dish?.sales && (
+          <Promo>
+            <MdPersonOutline />
+            <p>{dish.sales[0].description}</p>
+          </Promo>
+        )}
       </CardBody>
     </Card>
   );
