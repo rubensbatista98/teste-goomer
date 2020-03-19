@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef } from "react";
 
 import { Form, Label, Input, Button, IconSearch } from "./styles";
 
-const FormSearch = ({ bgColor, filterByValue }) => {
+const FormSearch = ({ bgColor, filterByValue, labelContent }) => {
   const [searchValue, setSearchValue] = useState("");
   const inputRef = useRef(null);
 
@@ -23,7 +23,7 @@ const FormSearch = ({ bgColor, filterByValue }) => {
 
   return (
     <Form bgColor={bgColor} onSubmit={handleSubmit}>
-      <Label htmlFor="search">Buscar estabelecimento</Label>
+      <Label htmlFor="search">Buscar {labelContent}</Label>
 
       <Input
         type="text"

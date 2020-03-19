@@ -101,7 +101,11 @@ const RestaurantMenu = () => {
       </Header>
 
       <Section>
-        <FormSearch bgColor="#E6E6E6" filterByValue={filterDishsByName} />
+        <FormSearch
+          bgColor="#E6E6E6"
+          filterByValue={filterDishsByName}
+          labelContent="no cardápio"
+        />
 
         {notFound ? (
           <NotFound>O prato buscado não esta disponível no cardápio.</NotFound>

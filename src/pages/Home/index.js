@@ -38,7 +38,10 @@ const Home = () => {
       <header>
         <Title>Bem-vindo ao Lista Rango</Title>
 
-        <FormSearch filterByValue={filterRestaurantsByName} />
+        <FormSearch
+          filterByValue={filterRestaurantsByName}
+          labelContent="estabelecimento"
+        />
       </header>
 
       <section>
