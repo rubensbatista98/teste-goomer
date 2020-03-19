@@ -45,7 +45,7 @@ export const Description = styled.p`
 
 export const Price = styled.span`
   font-weight: 500;
-  ${({ isPromoActive }) => handlePrice(isPromoActive)}
+  ${({ promoIsActive }) => handlePrice(promoIsActive)}
 `;
 
 function handlePrice(promoStatus) {
