@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useContext
+} from "react";
 import { useParams } from "react-router-dom";
 
 import FormSearch from "../../components/FormSearch";
@@ -22,12 +28,70 @@ const RestaurantMenu = () => {
   const [restaurant, setRestaurant] = useState({});
   const [menu, setMenu] = useState([]);
   const [filteredDishes, setFilteredDishes] = useState([]);
+  const [schedules, setSchedules] = useState([]);
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState(false);
 
   const [restaurants] = useContext(RestaurantsContext);
 
   const { id } = useParams();
+
+  const daysOfWeek = useMemo(
+    () => [
+      "Domingo",
+      "Segunda",
+      "Terça",
+      "Quarta",
+      "Quinta",
+      "Sexta",
+      "Sábado"
+    ],
+    []
+  );
+
+  const handleSchedules = useCallback(
+    (hours = []) => {
+      const schedules = hours.reduce((schedulesAcc, hour) => {
+        const daysLength = hour.days.length;
+        let days = "";
+        let operatingHour = "";
+
+        if (daysLength === 1) {
+          days = `${daysOfWeek[hour.days[0] - 1]}s`;
+          operatingHour = `${hour.from} às ${hour.to}`;
+        }
+
+        if (daysLength === 2) {
+          days = `${daysOfWeek[hour.days[0] - 1]}s e ${
+            daysOfWeek[hour.days[1] - 1]
+          }s`;
+
+          operatingHour = `${hour.from} às ${hour.to}`;
+        }
+
+        if (daysLength === 3) {
+          days = `${daysOfWeek[hour.days[0] - 1]}, ${
+            daysOfWeek[hour.days[1] - 1]
+          } e ${daysOfWeek[hour.days[2] - 1]}`;
+
+          operatingHour = `${hour.from} às ${hour.to}`;
+        }
+
+        if (daysLength > 3) {
+          days = `${daysOfWeek[hour.days[0] - 1]} à ${
+            daysOfWeek[hour.days[daysLength - 1] - 1]
+          }`;
+
+          operatingHour = `${hour.from} às ${hour.to}`;
+        }
+        schedulesAcc.push({ days, hour: operatingHour });
+        return schedulesAcc;
+      }, []);
+
+      return schedules;
+    },
+    [daysOfWeek]
+  );
 
   const filterDishsByName = useCallback(
     name => {
@@ -60,6 +124,12 @@ const RestaurantMenu = () => {
   }, [restaurants, id]);
 
   useEffect(() => {
+    const schedules = handleSchedules(restaurant?.hours);
+
+    setSchedules(schedules);
+  }, [restaurant, handleSchedules]);
+
+  useEffect(() => {
     async function loadMenu() {
       try {
         setError(false);
@@ -88,15 +158,12 @@ const RestaurantMenu = () => {
         <div>
           <Title>{restaurant?.name?.toUpperCase()}</Title>
 
-          <Schedule>
-            Segunda à Sexta: <strong>11:30 às 15:00</strong>
-          </Schedule>
-          <Schedule>
-            Sábados: <strong>11:30 às 22:00</strong>
-          </Schedule>
-          <Schedule>
-            Domingos e Feriados: <strong>11:30 às 15:00</strong>
-          </Schedule>
+          {schedules.map((schedule, index) => (
+            <Schedule key={index}>
+              {`${schedule.days}: `}
+              <strong>{schedule.hour}</strong>
+            </Schedule>
+          ))}
         </div>
       </Header>
 
