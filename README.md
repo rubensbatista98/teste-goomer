@@ -8,6 +8,8 @@ Encontrei o teste no repositório [frontend-challenges](https://github.com/felip
 
 [Link para o repositório do teste](https://github.com/goomerdev/job-dev-frontend-interview).
 
+[Imagens do resultado final do projeto](https://github.com/rubensbatista98/teste-goomer/blob/master/layouts).
+
 ### Tecnologias utilizadas
 
 - [ReactJS](https://pt-br.reactjs.org/)
